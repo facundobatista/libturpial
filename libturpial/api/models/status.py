@@ -78,6 +78,9 @@ class Status:
         self.created_at = None
         self.local_datetime = None  # Store the timestamp as long integer in local time
 
+    def __repr__(self):
+        return "<Status: {}>".format(self.__dict__)
+
     def __eq__(self, status):
         return self.id_ == status.id_
 

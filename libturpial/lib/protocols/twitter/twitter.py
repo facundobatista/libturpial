@@ -96,6 +96,7 @@ class Main(Protocol):
 
     def get_timeline(self, count=NUM_STATUSES, since_id=None):
         args = self.__build_basic_args(count, since_id)
+        args['tweet_mode'] = 'extended'
         rtn = self.http.get('/statuses/home_timeline', args)
         self.check_for_errors(rtn)
         return self.json_to_status(rtn, StatusColumn.TIMELINE)
@@ -531,7 +532,7 @@ class Main(Protocol):
             status.created_at = post['created_at']
             status.username = username
             status.avatar = avatar
-            status.text = post['text']
+            status.text = post.get('text', post.get('full_text', u'ERROR: missing text and full_text'))
             status.in_reply_to_id = in_reply_to_id
             status.in_reply_to_user = in_reply_to_user
             status.is_favorite = fav

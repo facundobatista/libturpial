@@ -90,7 +90,7 @@ class Core(object):
 
         for status in statuses:
             filtered = False
-            for term in map(lambda x: x.lower(), filtered_terms):
+            for term in map(lambda x: x.decode('utf8').lower(), filtered_terms):
                 if term.startswith('@'):
                     # Filter statuses by user
                     if status.username.lower() == term[1:]:
