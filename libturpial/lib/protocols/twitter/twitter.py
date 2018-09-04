@@ -146,8 +146,12 @@ class Main(Protocol):
         return lists
 
     def get_list_statuses(self, list_id, count=NUM_STATUSES, since_id=None):
-        args = {'list_id': list_id, 'per_page': count,
-                'include_entities': True}
+        args = {
+            'list_id': list_id,
+            'per_page': count,
+            'include_entities': True,
+            'tweet_mode': 'extended',
+        }
         if since_id:
             args['since_id'] = since_id
         rtn = self.http.get('/lists/statuses', args)
